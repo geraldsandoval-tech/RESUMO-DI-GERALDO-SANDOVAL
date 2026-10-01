@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Radiologia Intervencionista · Revisão para a prova</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme: dark;
+  --black:#000;
+  --panel:#121212;
+  --panel-2:#181818;
+  --panel-3:#1f1f1f;
+  --line:#262626;
+  --line-2:#333;
+  --gold:#f2b81c;
+  --gold-soft:rgba(242,184,28,.12);
+  --white:#ffffff;
+  --text:#d6d6d6;
+  --muted:#8f8f8f;
+  --red:#e5484d;
+  --red-soft:rgba(229,72,77,.10);
+  --green:#3fb97c;
+  --green-soft:rgba(63,185,124,.09);
+  --serif:'Abril Fatface', 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --sans:'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --side:300px;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{background:var(--black);scroll-behavior:smooth;scroll-padding-top:calc(env(safe-area-inset-top,0px) + 20px)}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--black);color:var(--text);font-family:var(--sans);font-size:15.5px;line-height:1.75;-webkit-font-smoothing:antialiased}
+a{color:var(--gold)}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+strong{color:var(--white);font-weight:600}
+em{color:var(--white);font-style:italic}
+
+/* ---------- sidebar ---------- */
+.side{position:fixed;top:0;left:0;bottom:0;width:var(--side);background:var(--black);padding:calc(env(safe-area-inset-top,0px) + 34px) 30px 30px 38px;display:flex;flex-direction:column;z-index:30;overflow-y:auto}
+.side::after{content:"";position:absolute;top:0;right:0;bottom:0;width:6px;background:repeating-linear-gradient(to bottom,var(--gold) 0 3px,transparent 3px 6px);opacity:.55;
+  -webkit-mask:repeating-linear-gradient(to right,#000 0 1px,transparent 1px 3px);mask:repeating-linear-gradient(to right,#000 0 1px,transparent 1px 3px)}
+.logo{font-family:var(--serif);font-size:52px;line-height:.95;letter-spacing:-.5px;margin:0 0 6px;
+  background:linear-gradient(115deg,#f6e7c1 0%,#c9a24a 30%,#8c9aa8 55%,#d9c08a 75%,#7e8b97 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.logo-sub{font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin:0 0 40px}
+.nav{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.nav a{display:inline-block;color:#eaeaea;text-decoration:none;font-weight:600;font-size:13.5px;letter-spacing:.09em;text-transform:uppercase;padding:6px 0 4px;border-bottom:2px solid transparent;transition:color .15s,border-color .15s}
+.nav a:hover{color:var(--gold)}
+.nav a.active{color:var(--gold);border-bottom-color:var(--gold)}
+.side-box{margin-top:auto;padding-top:28px}
+.side-box h4{font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;color:#bdbdbd;margin:0 0 10px;font-weight:600}
+.side-box .box{border:1px solid var(--line-2);padding:12px 14px;font-size:13px;color:var(--muted);line-height:1.6}
+.side-box .box b{color:var(--gold);font-weight:600}
+
+/* ---------- main ---------- */
+main{margin-left:var(--side);min-height:100vh;background:#0b0b0b}
+.hero{position:relative;min-height:440px;display:flex;align-items:flex-end;overflow:hidden;
+  background:
+    radial-gradient(1200px 500px at 75% 10%, rgba(255,255,255,.07), transparent 60%),
+    radial-gradient(700px 380px at 20% 80%, rgba(242,184,28,.07), transparent 65%),
+    repeating-linear-gradient(115deg, rgba(255,255,255,.018) 0 2px, transparent 2px 9px),
+    linear-gradient(160deg,#1c1c1c 0%,#0e0e0e 55%,#050505 100%)}
+.hero-art{position:absolute;inset:0;pointer-events:none;opacity:.9}
+.hero-inner{position:relative;padding:60px 60px 0;width:100%}
+.hero .eyebrow{font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin:0 0 14px;font-weight:600}
+.panel{background:var(--panel);padding:44px 60px 50px;border-bottom:1px solid #0b0b0b}
+.hero + .panel{padding-top:40px}
+h1.title{font-family:var(--serif);font-weight:400;color:var(--white);font-size:clamp(40px,6vw,72px);line-height:1.02;margin:0;letter-spacing:-.5px}
+.lead{color:var(--muted);max-width:78ch;margin:18px 0 0;font-size:15.5px}
+.author{color:var(--gold);font-weight:500;margin:10px 0 0;font-size:14px;letter-spacing:.04em}
+
+section.block{background:var(--panel);padding:52px 60px 56px;border-top:1px solid #0b0b0b}
+section.block:nth-of-type(even){background:#101010}
+.sec-num{font-family:var(--serif);color:var(--gold);font-size:22px;display:block;margin:0 0 4px}
+h2{font-family:var(--serif);font-weight:400;color:var(--white);font-size:clamp(30px,4.2vw,46px);line-height:1.08;margin:0 0 18px;letter-spacing:-.3px}
+h3{font-family:var(--serif);font-weight:400;color:var(--white);font-size:24px;margin:34px 0 12px;letter-spacing:-.1px}
+h4{font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin:0 0 8px;font-weight:600}
+p{margin:0 0 14px;max-width:80ch}
+ul,ol{margin:0 0 16px;padding-left:20px;max-width:82ch}
+li{margin:0 0 7px}
+li::marker{color:var(--gold)}
+.src{display:inline-block;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;font-weight:600;color:var(--muted);border:1px solid var(--line-2);padding:1px 7px;margin-left:8px;vertical-align:middle}
+.src.rev{color:var(--gold);border-color:rgba(242,184,28,.4)}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px;margin:0 0 18px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:0 0 18px}
+.grid>*,.two>*{min-width:0}
+.card{background:var(--panel-2);border:1px solid var(--line);padding:20px 22px}
+.card>:last-child{margin-bottom:0}
+.card p{font-size:14.5px}
+
+.tip,.trap,.ok{border-left:3px solid;padding:14px 20px;margin:0 0 18px;background:var(--panel-2)}
+.tip{border-color:var(--gold)} .trap{border-color:var(--red);background:var(--red-soft)} .ok{border-color:var(--green);background:var(--green-soft)}
+.tip .tag,.trap .tag,.ok .tag{display:block;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;margin-bottom:6px}
+.tip .tag{color:var(--gold)} .trap .tag{color:var(--red)} .ok .tag{color:var(--green)}
+.tip>:last-child,.trap>:last-child,.ok>:last-child{margin-bottom:0}
+.tip ul,.trap ul,.ok ul{margin-bottom:0}
+
+.tbl{overflow-x:auto;margin:0 0 20px;border:1px solid var(--line)}
+table{border-collapse:collapse;width:100%;min-width:560px;font-size:14px}
+th,td{text-align:left;padding:12px 16px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);font-weight:600;background:#0e0e0e}
+td{color:var(--text)}
+tr:last-child td{border-bottom:0}
+td.k{color:var(--white);font-weight:600;white-space:nowrap}
+td.n{font-family:var(--serif);color:var(--gold);font-size:18px;width:46px}
+tr.hl td{background:rgba(242,184,28,.06)}
+
+.steps{list-style:none;padding:0;margin:0 0 20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;max-width:none;counter-reset:s}
+.steps li{counter-increment:s;background:var(--panel-2);border:1px solid var(--line);padding:16px 18px;margin:0;font-size:14px}
+.steps li::before{content:counter(s,decimal-leading-zero);font-family:var(--serif);color:var(--gold);font-size:24px;display:block;line-height:1;margin-bottom:8px}
+.steps li b{display:block;color:var(--white);font-weight:600;margin-bottom:3px}
+
+.check{list-style:none;padding:0}
+.check li{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--line);margin:0}
+.check li::before{content:"✓";color:var(--gold);font-weight:700}
+.check li:last-child{border-bottom:0}
+
+.big{font-family:var(--serif);color:var(--gold);font-size:30px;line-height:1}
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:0 0 20px}
+.stat{background:var(--panel-2);border:1px solid var(--line);padding:18px}
+.stat .lbl{font-size:13px;color:var(--muted);margin-top:8px;line-height:1.45}
+
+footer{background:var(--black);color:var(--muted);font-size:13px;padding:30px 60px 40px;border-top:1px solid var(--line)}
+
+/* mobile */
+.mbar{display:none}
+@media (max-width:960px){
+  .side{transform:translateX(-100%);transition:transform .2s;width:min(300px,86vw);box-shadow:0 0 40px rgba(0,0,0,.6)}
+  .side.open{transform:none}
+  main{margin-left:0}
+  .mbar{display:flex;position:sticky;top:0;z-index:25;align-items:center;justify-content:space-between;background:rgba(0,0,0,.94);padding:calc(env(safe-area-inset-top,0px) + 10px) 18px 10px;border-bottom:1px solid var(--line)}
+  .mbar .mlogo{font-family:var(--serif);font-size:24px;color:var(--white)}
+  .mbar button{background:none;border:1px solid var(--line-2);color:var(--gold);font:600 12px var(--sans);letter-spacing:.12em;text-transform:uppercase;padding:8px 12px;cursor:pointer}
+  .scrim{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:29}
+  .scrim[hidden]{display:none}
+  .panel,section.block{padding:34px 20px 38px}
+  .hero-inner{padding:40px 20px 0}
+  .hero{min-height:320px}
+  .two{grid-template-columns:1fr}
+  footer{padding:24px 20px 34px}
+  html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 70px)}
+}
+@media print{
+  .side,.mbar,.scrim{display:none!important}
+  main{margin:0} body,main,section.block,.panel{background:#fff;color:#111}
+  h1,h2,h3,strong{color:#000}
+  .tbl,.card,.tip,.trap{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+
+<div class="mbar"><span class="mlogo">RI·Revisão</span><button id="menuBtn" type="button" aria-expanded="false" aria-controls="side">Menu</button></div>
+<div class="scrim" id="scrim" hidden></div>
+
+<aside class="side" id="side" aria-label="Navegação">
+  <div class="logo">Radiologia</div>
+  <p class="logo-sub">Intervencionista · 4º P</p>
+  <ul class="nav" id="nav">
+    <li><a href="#topo">Início</a></li>
+    <li><a href="#s1">20 tópicos</a></li>
+    <li><a href="#s2">Conceitos</a></li>
+    <li><a href="#s3">Equipe</a></li>
+    <li><a href="#s4">Raio-X × Fluoro</a></li>
+    <li><a href="#s5">Anatomia</a></li>
+    <li><a href="#s6">Hemodinâmica</a></li>
+    <li><a href="#s7">Angioplastia</a></li>
+    <li><a href="#s8">Pós e complicações</a></li>
+    <li><a href="#s9">Stents</a></li>
+    <li><a href="#s10">Angiografia</a></li>
+    <li><a href="#s11">Contrastes</a></li>
+    <li><a href="#s12">PMMA</a></li>
+    <li><a href="#s13">Arco em C</a></li>
+    <li><a href="#s14">Proteção e EPI</a></li>
+    <li><a href="#s15">Riscos</a></li>
+    <li><a href="#s16">Direcionamento</a></li>
+  </ul>
+  <div class="side-box">
+    <h4>Foco da prova</h4>
+    <div class="box"><b>Intervenção é cirurgia.</b> CO₂ nunca acima do diafragma. Tubo <b>embaixo</b>, intensificador <b>em cima</b>. Angioplastia <b>não usa mola</b>.</div>
+  </div>
+</aside>
+
+<main>
+  <header class="hero" id="topo">
+    <svg class="hero-art" viewBox="0 0 1200 440" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <defs>
+        <linearGradient id="gv" x1="0" x2="1"><stop offset="0" stop-color="#f2b81c" stop-opacity=".0"/><stop offset=".5" stop-color="#f2b81c" stop-opacity=".55"/><stop offset="1" stop-color="#f2b81c" stop-opacity="0"/></linearGradient>
+        <radialGradient id="gh" cx=".72" cy=".38" r=".5"><stop offset="0" stop-color="#ffffff" stop-opacity=".09"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/></radialGradient>
+      </defs>
+      <rect width="1200" height="440" fill="url(#gh)"/>
+      <g fill="none" stroke="#3a3a3a" stroke-width="2">
+        <path d="M640 -20 C 700 80, 760 120, 820 170 S 930 260, 960 330 S 990 420, 1010 470"/>
+        <path d="M820 170 C 860 150, 920 150, 980 120 S 1080 60, 1140 40"/>
+        <path d="M900 245 C 950 255, 1010 280, 1060 320 S 1150 390, 1210 400"/>
+        <path d="M760 120 C 730 160, 700 210, 690 270 S 680 360, 700 460"/>
+      </g>
+      <g fill="none" stroke="url(#gv)" stroke-width="3">
+        <path d="M640 -20 C 700 80, 760 120, 820 170 S 930 260, 960 330 S 990 420, 1010 470"/>
+      </g>
+      <g fill="#f2b81c" opacity=".85"><circle cx="820" cy="170" r="4"/><circle cx="960" cy="330" r="4"/></g>
+      <g stroke="#f2b81c" stroke-width="1.5" fill="none" opacity=".7"><rect x="900" y="300" width="70" height="26" rx="13" transform="rotate(58 935 313)"/><path d="M905 300 l20 26 M920 296 l20 26 M935 292 l20 26 M950 288 l20 26" transform="rotate(0)"/></g>
+    </svg>
+    <div class="hero-inner">
+      <p class="eyebrow">Diagnóstico por Imagem · Revisão 4º Período</p>
+    </div>
+  </header>
+  <div class="panel">
+    <h1 class="title">Radiologia Intervencionista</h1>
+    <p class="author">por Geraldo Sandoval</p>
+    <p class="lead">Resumo direcionado para a prova, montado sobre a leitura das 20 questões feita em sala, a <strong>Revisão DI 4º P</strong> e os <strong>slides gerais de Radiologia Intervencionista</strong>. A etiqueta <span class="src rev">Revisão</span> marca conteúdo da revisão; <span class="src">Slides</span>, dos slides oficiais.</p>
+  </div>
+
+  <!-- 1 -->
+  <section class="block" id="s1">
+    <span class="sec-num">01</span>
+    <h2>Os 20 tópicos da prova</h2>
+    <p>Uma linha por pergunta prevista: o que o professor quer e a resposta que pontua.</p>
+    <div class="tbl"><table>
+      <thead><tr><th>#</th><th>Tópico</th><th>Resposta que pontua</th></tr></thead>
+      <tbody>
+        <tr><td class="n">1</td><td class="k">Objetivos da RI</td><td><strong>Diagnóstico preciso</strong> (biópsias, angiografias), <strong>terapêutica minimamente invasiva</strong> (desobstruir, ocluir, drenar, destruir tumores) e <strong>vantagens clínicas</strong></td></tr>
+        <tr><td class="n">2</td><td class="k">Vantagens</td><td>Stent × ponte de safena: punção de 2 mm, paciente acordado, deambula em horas, alta no dia seguinte, sem mediastinite</td></tr>
+        <tr><td class="n">3</td><td class="k">Equipe multidisciplinar</td><td>Médico, anestesista, enfermagem, tecnólogo, físico, biomédico — "a equipe se completa", no pré, intra e pós</td></tr>
+        <tr class="hl"><td class="n">4</td><td class="k">Radiografia × fluoroscopia</td><td>Radiografia: <strong>estática</strong> ("fotografia"). Fluoroscopia: <strong>dinâmica, em tempo real</strong> ("filme"), com arco em C</td></tr>
+        <tr><td class="n">5</td><td class="k">Coronárias e cateterismo</td><td>ACD; ACE → <strong>DA</strong> (anterior + septo) e <strong>Cx</strong> (lateral). Cateterismo = coronárias, <strong>não carótida</strong></td></tr>
+        <tr><td class="n">6</td><td class="k">Músculo divisor</td><td><strong>Diafragma</strong>: separa tórax e abdome; dita a regra do CO₂</td></tr>
+        <tr><td class="n">7</td><td class="k">Hemodinâmica</td><td>Estudo da <strong>circulação do sangue</strong>; avalia fisiologia e <strong>pressões</strong> (a angiografia avalia a anatomia)</td></tr>
+        <tr class="hl"><td class="n">8</td><td class="k">Angioplastia: técnica</td><td>Seldinger → fio-guia → <strong>balão</strong> (alta pressão) → <strong>stent</strong>. Acesso radial ou femoral. <strong>Não usa mola</strong></td></tr>
+        <tr><td class="n">9</td><td class="k">Angioplastia: pós</td><td><strong>DAPT</strong> (AAS + clopidogrel) + estatina; compressão e repouso; trombose do stent e reestenose</td></tr>
+        <tr><td class="n">10</td><td class="k">Angiografia</td><td>Mapeia a luz dos vasos; padrão-ouro anatômico; subtração digital; fases <strong>arterial, parenquimatosa e venosa</strong></td></tr>
+        <tr><td class="n">11</td><td class="k">Stents</td><td>Convencional: metal nu, mais reestenose. Farmacológico: polímero com antiproliferativo, reestenose &lt; 5%</td></tr>
+        <tr><td class="n">12</td><td class="k">Classificação dos contrastes</td><td>Pela absorção de raios X: positivo (iodo, bário) × negativo (ar, CO₂). Não confundir com medicina nuclear</td></tr>
+        <tr class="hl"><td class="n">13</td><td class="k">Contraindicações</td><td>Iodo: nefropatia, alergia, tireotoxicose. CO₂: <strong>nunca acima do diafragma</strong> (embolia gasosa cerebral)</td></tr>
+        <tr><td class="n">14</td><td class="k">Contraste negativo</td><td>CO₂: radiotransparente, solúvel, <strong>zero nefrotoxicidade e sem alergia</strong>; só com subtração digital</td></tr>
+        <tr><td class="n">15</td><td class="k">PMMA</td><td>Vertebroplastia e cifoplastia; <strong>BCIS</strong>: hipotensão, hipóxia, arritmia e até parada</td></tr>
+        <tr class="hl"><td class="n">16</td><td class="k">Arco cirúrgico</td><td>Emite no <strong>tubo (ampola), embaixo</strong>; capta no <strong>intensificador ou flat panel, em cima</strong>; colimador</td></tr>
+        <tr><td class="n">17</td><td class="k">Proteção radiológica</td><td><strong>ALARA</strong>: tempo, distância (inverso do quadrado), blindagem, colimação; justificação, limitação, otimização</td></tr>
+        <tr><td class="n">18</td><td class="k">EPIs</td><td>Avental plumbífero, protetor de tireoide, óculos plumbíferos, dosímetro; EPC: biombo e saias de chumbo</td></tr>
+        <tr><td class="n">19</td><td class="k">Riscos (1)</td><td>"<strong>Intervenção é cirurgia</strong>": riscos locais, técnicos e sistêmicos</td></tr>
+        <tr><td class="n">20</td><td class="k">Riscos (2)</td><td>Hematoma ou retroperitônio, dissecção, perfuração, embolização distal, anafilaxia, nefropatia</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <!-- 2 -->
+  <section class="block" id="s2">
+    <span class="sec-num">02</span>
+    <h2>Conceitos, objetivos e vantagens</h2>
+    <div class="tip"><span class="tag">Definição <span class="src">Slides</span></span><p>Especialidade médica que utiliza <strong>técnicas minimamente invasivas, guiadas por métodos de imagem</strong> (US, TC, RM, RX, fluoroscopia), para <strong>diagnosticar e tratar</strong> doenças em praticamente todos os órgãos — por acesso percutâneo, sob anestesia local ou sedação.</p></div>
+    <h3>Objetivos <span class="src rev">Revisão</span></h3>
+    <div class="grid">
+      <div class="card"><h4>Diagnóstico preciso</h4><p>Acessar órgãos e vasos sob visão direta da imagem: <strong>biópsias percutâneas</strong> e mapeamento do fluxo (<strong>angiografias</strong>).</p></div>
+      <div class="card"><h4>Terapêutica minimamente invasiva</h4><p>Sem grandes incisões: <strong>desobstruir</strong> (angioplastia e stent), <strong>ocluir</strong> sangramentos ou tumores (embolização), <strong>drenar</strong> (nefrostomia, dreno biliar), <strong>destruir tumores</strong> (ablação térmica).</p></div>
+      <div class="card"><h4>Vantagens clínicas</h4><p>Redução drástica da internação, menor morbimortalidade, menos dor pós-operatória e retorno rápido às atividades.</p></div>
+    </div>
+    <h3>Stent × cirurgia aberta <span class="src rev">Revisão</span></h3>
+    <div class="tbl"><table>
+      <thead><tr><th>Critério</th><th>Angioplastia com stent</th><th>Revascularização (ponte de safena ou mamária)</th></tr></thead>
+      <tbody>
+        <tr><td class="k">Acesso</td><td>Punção de <strong>2 mm</strong> na artéria radial</td><td>Esternotomia mediana e dissecção profunda</td></tr>
+        <tr><td class="k">Anestesia</td><td>Paciente <strong>acordado</strong> (local e sedação consciente)</td><td>Geral, intubação e, muitas vezes, <strong>circulação extracorpórea</strong></td></tr>
+        <tr><td class="k">Recuperação</td><td>Deambula em horas; <strong>alta no dia seguinte</strong></td><td>UTI, dor intensa, semanas de restrição e reabilitação</td></tr>
+        <tr><td class="k">Complicações cirúrgicas</td><td><strong>Zera</strong> mediastinite e infecção de ferida operatória</td><td>Risco de mediastinite e infecção de ferida</td></tr>
+      </tbody>
+    </table></div>
+    <p><span class="src">Slides</span> Também citados: cortes pequenos, menor probabilidade de infecção, rápido restabelecimento, menor internação e <strong>menor custo</strong>. A fluoroscopia é uma das técnicas mais usadas; os cardiologistas fazem o maior número de procedimentos, e muitas outras especialidades se tornaram intervencionistas.</p>
+    <div class="grid">
+      <div class="card"><h4>Embolização</h4><p>Bloqueia o fluxo para prevenir ou deter hemorragias, desvitalizar tumores e tratar malformações. Agentes: microesferas de PVA, gel foam, <strong>coils (molas)</strong>, polímero líquido.</p></div>
+      <div class="card"><h4>Aneurisma cerebral</h4><p>Preenchido com <strong>molas de platina</strong> ou polímero, impedindo o fluxo e a ruptura.</p></div>
+      <div class="card"><h4>Miomas e quimioembolização</h4><p>Embolização de miomas: resultados semelhantes à histerectomia. Quimioembolização: mais droga no tumor, menos no corpo, com isquemia tumoral.</p></div>
+    </div>
+  </section>
+
+  <!-- 3 -->
+  <section class="block" id="s3">
+    <span class="sec-num">03</span>
+    <h2>Equipe multidisciplinar</h2>
+    <p>A sala de hemodinâmica funciona sob extrema coordenação: cada membro tem uma função inegociável. <span class="src">Slides</span> <strong>"Toda a equipe multidisciplinar se completa"</strong>, e todos atuam no <strong>pré, intra e pós-procedimento</strong>.</p>
+    <div class="tbl"><table>
+      <thead><tr><th>Profissional</th><th>Papel na sala <span class="src rev">Revisão</span></th></tr></thead>
+      <tbody>
+        <tr><td class="k">Médico intervencionista</td><td>Radiologista ou hemodinamicista: comanda o procedimento, manipula cateteres e fios-guia, interpreta a fluoroscopia</td></tr>
+        <tr><td class="k">Anestesiologista</td><td>Procedimentos longos ou dolorosos (quimioembolização, ablação): dor, sedação, estabilização em choque, arritmia ou intubação de emergência</td></tr>
+        <tr><td class="k">Enfermeiro e técnico</td><td>Preparo da sala, monitorização contínua, administração rápida de heparina, vasodilatadores ou atropina sob comando, controle de materiais (stents, balões)</td></tr>
+        <tr class="hl"><td class="k">Tecnólogo em radiologia</td><td>Opera o <strong>arco em C</strong>, otimiza filtros, gerencia a <strong>subtração digital</strong>, controla blindagem e protocolos de redução de dose</td></tr>
+        <tr><td class="k">Físico e biomédico</td><td>Integram a equipe citada nos slides; o físico atua na otimização da dose</td></tr>
+      </tbody>
+    </table></div>
+    <div class="trap"><span class="tag">Pegadinha</span><p>A questão foca nos <strong>demais profissionais</strong>. Se a alternativa disser que "só o médico importa" ou que a equipe atua "apenas durante o exame", está errada.</p></div>
+  </section>
+
+  <!-- 4 -->
+  <section class="block" id="s4">
+    <span class="sec-num">04</span>
+    <h2>Radiografia × fluoroscopia</h2>
+    <div class="tbl"><table>
+      <thead><tr><th></th><th>Radiografia convencional ("raio-X padrão")</th><th>Fluoroscopia ou radioscopia ("olho do intervencionista")</th></tr></thead>
+      <tbody>
+        <tr><td class="k">Física</td><td>Disparo de um feixe em <strong>fração de segundo</strong></td><td>Emissão <strong>contínua ou pulsada</strong>, em alta frequência (arco em C)</td></tr>
+        <tr class="hl"><td class="k">Imagem</td><td><strong>Estática</strong>: "fotografia" de um momento congelado; processada depois (filme, CR)</td><td><strong>Dinâmica</strong>: "filme de vídeo" anatômico <strong>em tempo real</strong> (0,5 a 30 imagens/s)</td></tr>
+        <tr><td class="k">Uso</td><td>Fraturas, derrames pleurais, consolidações</td><td>Guiar agulhas, fios-guia, cateteres e ver o contraste dentro dos vasos</td></tr>
+        <tr><td class="k">Dose</td><td>Uma exposição</td><td>Muitas imagens → <strong>otimizar a dose</strong></td></tr>
+      </tbody>
+    </table></div>
+    <p><span class="src">Slides</span> O fluoroscópio é uma <strong>fonte de raios X</strong> e uma <strong>tela fluorescente</strong>, com o <strong>paciente entre as duas</strong>. Nos sistemas atuais, o tubo fica abaixo da mesa e o intensificador acima; desde o fim dos anos 70, câmeras levam a imagem a um monitor, com arquivamento e visualização simultânea. As duas técnicas usam raios X.</p>
+  </section>
+
+  <!-- 5 -->
+  <section class="block" id="s5">
+    <span class="sec-num">05</span>
+    <h2>Anatomia: acessos, coronárias e diafragma</h2>
+    <h3>Vias de acesso arterial <span class="src rev">Revisão</span></h3>
+    <div class="two">
+      <div class="card"><h4>Artéria radial</h4><p>Hoje é a via <strong>padrão-ouro</strong> (preferencial) no cateterismo: <strong>menos complicações hemorrágicas</strong>, e o paciente caminha logo após.</p></div>
+      <div class="card"><h4>Artéria femoral comum</h4><p>Tradicional e calibrosa, usada em intervenções grandes (aneurisma de aorta, neurointervenção). Exige <strong>repouso absoluto no leito por horas</strong> após retirar o introdutor.</p></div>
+    </div>
+    <p><strong>Trajeto pelo acesso radial</strong>: artéria radial → braquial → subclávia → arco aórtico → <strong>raiz da aorta</strong>, onde o cateter é encaixado nos <strong>óstios coronarianos</strong> para injetar o contraste. <span class="src">Slides</span> A braquial é o local alternativo; o cateterismo também se chama <strong>cinecoronariografia</strong> ou estudo hemodinâmico.</p>
+
+    <h3>Coronárias (o alvo)</h3>
+    <div class="tbl"><table>
+      <thead><tr><th>Artéria</th><th>Território</th></tr></thead>
+      <tbody>
+        <tr><td class="k">Coronária direita (ACD)</td><td>Ventrículo direito e parede <strong>inferior</strong> do VE. Ramos (slides): marginal direita e descendente posterior</td></tr>
+        <tr><td class="k">Coronária esquerda (ACE)</td><td>Tronco curto que se bifurca em dois ramos</td></tr>
+        <tr class="hl"><td class="k">↳ Descendente anterior (DA)</td><td>A mais importante ("<strong>faz-viúvas</strong>"): parede <strong>anterior</strong> do VE e <strong>septo</strong>. Ramos diagonais</td></tr>
+        <tr><td class="k">↳ Circunflexa (Cx)</td><td>Parede <strong>lateral</strong> do VE. Ramo marginal esquerdo</td></tr>
+      </tbody>
+    </table></div>
+    <div class="two">
+      <div class="card"><h4>Artéria × veia</h4><p><strong>Artérias</strong> saem do coração e levam o sangue aos tecidos; <strong>veias</strong> o retornam. As coronárias nutrem o miocárdio; obstrução não tratada leva a <strong>infarto</strong>.</p></div>
+      <div class="trap"><span class="tag">Não confunda</span><p>Cateterismo <strong>cardíaco</strong> estuda as <strong>coronárias</strong>. <strong>Carótida</strong> é a artéria do pescoço, que leva sangue ao encéfalo.</p></div>
+    </div>
+
+    <h3>O músculo divisor: diafragma <span class="src rev">Revisão</span></h3>
+    <p>Principal músculo da ventilação (inspiração), em forma de <strong>cúpula</strong>; é a fronteira anatômica que <strong>separa a cavidade torácica da abdominal</strong>.</p>
+    <div class="stat-grid">
+      <div class="stat"><div class="big">T8</div><div class="lbl">Hiato da veia cava inferior</div></div>
+      <div class="stat"><div class="big">T10</div><div class="lbl">Hiato esofágico (esôfago e nervo vago)</div></div>
+      <div class="stat"><div class="big">T12</div><div class="lbl">Hiato aórtico (aorta descendente, ducto torácico, ázigos)</div></div>
+    </div>
+    <div class="tip"><span class="tag">Correlação com a RI</span><p>O diafragma dita a regra do CO₂: <strong>seguro abaixo</strong> (abdome e membros inferiores), <strong>totalmente contraindicado acima</strong> (tórax, coronárias e cérebro).</p></div>
+  </section>
+
+  <!-- 6 -->
+  <section class="block" id="s6">
+    <span class="sec-num">06</span>
+    <h2>Hemodinâmica</h2>
+    <div class="tip"><span class="tag">Conceito <span class="src">Slides</span></span><p>Estudo da <strong>circulação do sangue</strong>: estudo, diagnóstico e tratamento de patologias <strong>cardiovasculares e neurológicas</strong> pela corrente sanguínea, com <strong>cateteres, guias e arco em C</strong>. Cateter é o tubo ou sonda, flexível ou rígido, introduzido em canais ou cavidades.</p></div>
+    <h3>Anatomia × fisiologia <span class="src rev">Revisão</span></h3>
+    <div class="two">
+      <div class="card"><h4>Angiografia</h4><p>Avalia a <strong>anatomia</strong>: se o vaso está entupido e qual o seu trajeto.</p></div>
+      <div class="card"><h4>Estudo hemodinâmico</h4><p>Avalia a <strong>fisiologia e as pressões</strong> do sistema cardiovascular.</p></div>
+    </div>
+    <ul>
+      <li><strong>Pressões intracavitárias</strong>: átrios, ventrículos, aorta e artéria pulmonar.</li>
+      <li><strong>Oximetria</strong>: saturação de O₂ nas câmaras, para detectar fístulas ou shunts congênitos.</li>
+      <li><strong>Débito cardíaco e gradientes transvalvares</strong>: gravidade de estenoses e insuficiências.</li>
+      <li><strong>FFR (reserva de fluxo fracionada)</strong>: fio-guia com sensor de pressão mede antes e depois da placa. Queda significativa indica placa causando isquemia → stent. Pressão mantida → tratamento clínico, evitando stent desnecessário.</li>
+    </ul>
+  </section>
+
+  <!-- 7 -->
+  <section class="block" id="s7">
+    <span class="sec-num">07</span>
+    <h2>Angioplastia: técnica e decisão</h2>
+    <p><span class="src">Slides</span> Procedimento <strong>não cirúrgico</strong> que desobstrui artérias com fluxo prejudicado por placas; pode ser feito em <strong>várias artérias</strong>, inclusive logo após a coronariografia. Cateterismo <strong>diagnóstico</strong> é a coronariografia; cateterismo <strong>terapêutico</strong> inclui a angioplastia.</p>
+    <h3>O processo <span class="src rev">Revisão</span></h3>
+    <ol class="steps">
+      <li><b>Acesso e navegação</b>Punção pela <strong>técnica de Seldinger</strong>; cateter até a origem do vaso; <strong>fio-guia</strong> finíssimo cruza a placa</li>
+      <li><b>Dilatação com balão</b>Balão <strong>desinsuflado</strong> desliza pelo fio-guia e é inflado sob <strong>alta pressão</strong> (~20 atm nos slides), esmagando a placa</li>
+      <li><b>Implante do stent</b>Contra o <strong>recolhimento elástico</strong> (recoil): o balão abre a malha metálica, que fica como "andaime" definitivo</li>
+    </ol>
+    <div class="trap"><span class="tag">"Usa mola?"</span><p><strong>Não.</strong> Angioplastia = <strong>fio-guia, balão e stent</strong>, para <strong>abrir</strong> o vaso. <strong>Mola (coil) de platina</strong> é da <strong>embolização</strong>, para <strong>fechar</strong> o fluxo (aneurisma cerebral, sangramento, malformação).</p></div>
+    <p><span class="src">Slides</span> Balão isolado: sucesso <strong>&gt; 90%</strong> a curto prazo, mas <strong>~30% reobstruem em 6 meses</strong> — por isso praticamente toda angioplastia leva stent. Lesão em <strong>1 ou no máximo 2 ramos</strong> → angioplastia; lesões <strong>muito graves e múltiplas</strong> → bypass.</p>
+
+    <h3>Quando fazer (ou não) o stent <span class="src rev">Revisão</span></h3>
+    <div class="tbl"><table>
+      <thead><tr><th>Cenário</th><th>Conduta</th></tr></thead>
+      <tbody>
+        <tr class="hl"><td class="k">IAM com supra de ST</td><td><strong>Indicação absoluta e de urgência</strong> (angioplastia primária): abrir salva músculo e reduz mortalidade, independentemente de testes funcionais</td></tr>
+        <tr><td class="k">Angina estável — fazer</td><td>Oclusão de 1 ou 2 artérias (não o tronco) com <strong>grande área de isquemia</strong> e sintomas refratários a remédios</td></tr>
+        <tr><td class="k">Angina estável — não fazer</td><td>Placas pequenas, <strong>FFR &gt; 0,80</strong> ou sem isquemia documentada e sem dor limitante → tratamento clínico</td></tr>
+        <tr><td class="k">Cirurgia aberta</td><td>Lesões muito complexas, <strong>tronco da coronária esquerda</strong> ou doença grave nas 3 artérias (sobretudo em diabéticos)</td></tr>
+      </tbody>
+    </table></div>
+    <div class="two">
+      <div class="card"><h4>Critério anatômico (estenose)</h4>
+        <ul>
+          <li><strong>&lt; 50%</strong>: leve → só tratamento clínico (AAS, estatina).</li>
+          <li><strong>50–70%</strong>: moderada → precisa de teste funcional.</li>
+          <li><strong>&gt; 70%</strong> (DA, Cx, ACD): grave → tradicionalmente, stent.</li>
+          <li><strong>&gt; 50% no tronco</strong> da coronária esquerda: gravíssima → em geral, ponte de safena.</li>
+        </ul>
+      </div>
+      <div class="card"><h4>Critério funcional (FFR)</h4>
+        <ul>
+          <li>Fio-guia com sensor de pressão atravessa a placa.</li>
+          <li><strong>FFR ≤ 0,80</strong>: isquemia real → <strong>stent</strong>.</li>
+          <li><strong>FFR &gt; 0,80</strong>: placa não restringe → <strong>sem stent</strong>, só remédios.</li>
+          <li>Placa de 80% "na imagem" pode não causar isquemia (vasos colaterais).</li>
+        </ul>
+        <p style="font-size:13px;color:var(--muted)">A revisão escreve "&lt; 0,80" em um slide e "≤ 0,80" em outro; o corte é 0,80.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8 -->
+  <section class="block" id="s8">
+    <span class="sec-num">08</span>
+    <h2>Pós-angioplastia e complicações</h2>
+    <h3>Farmacologia — "a receita de bolo" <span class="src rev">Revisão</span></h3>
+    <p>O corpo enxerga a malha metálica como corpo estranho trombogênico; a complicação mais fatal é a <strong>trombose aguda do stent</strong>. Base: <strong>DAPT (dupla antiagregação plaquetária)</strong>.</p>
+    <div class="tbl"><table>
+      <thead><tr><th>Fármaco</th><th>Detalhe</th></tr></thead>
+      <tbody>
+        <tr><td class="k">AAS</td><td>Inibidor <strong>irreversível da COX-1</strong>; usado <strong>para o resto da vida</strong></td></tr>
+        <tr class="hl"><td class="k">Clopidogrel</td><td>Inibidor do <strong>receptor P2Y12</strong>, o mais comum; pró-fármaco de metabolização hepática (CYP2C19). Slides: <strong>AAS + clopidogrel (Plavix®)</strong> são os mais prescritos</td></tr>
+        <tr><td class="k">Ticagrelor / prasugrel</td><td>P2Y12 mais potentes; preferidos na angioplastia do infarto agudo</td></tr>
+        <tr><td class="k">Tempo do P2Y12</td><td>Em geral <strong>6 a 12 meses</strong>, até o stent ser recoberto (endotelizado)</td></tr>
+        <tr><td class="k">Estatina de alta potência</td><td>Rosuvastatina ou atorvastatina, obrigatória independentemente do colesterol (efeito pleiotrópico)</td></tr>
+      </tbody>
+    </table></div>
+    <div class="grid">
+      <div class="card"><h4>Cuidados</h4><p><span class="src">Slides</span> Alta no <strong>dia seguinte</strong>; cateter retirado; paciente <strong>deitado por algumas horas</strong> com <strong>compressão femoral</strong> para evitar hematoma.</p></div>
+      <div class="card"><h4>Hábitos</h4><p>Controle de diabetes, hipertensão e colesterol, perda de peso e <strong>parar de fumar</strong> para impedir a trombose do stent.</p></div>
+      <div class="card"><h4>Ressonância</h4><p>Stents modernos em geral <strong>não contraindicam RM</strong>; confirmar se é <strong>"MR safe"</strong>.</p></div>
+    </div>
+    <h3>Complicações possíveis <span class="src rev">Revisão</span></h3>
+    <div class="tbl"><table>
+      <thead><tr><th>Onde</th><th>Complicação</th></tr></thead>
+      <tbody>
+        <tr><td class="k">Sítio de punção</td><td>Hematoma volumoso, sangramento com transfusão, <strong>fístula arteriovenosa</strong>, <strong>pseudoaneurisma</strong> femoral</td></tr>
+        <tr><td class="k">Vaso tratado — agudas</td><td><strong>Dissecção</strong> (a ponta rasga a parede), <strong>perfuração</strong>, <strong>trombose aguda do stent</strong> (infarto fulminante)</td></tr>
+        <tr class="hl"><td class="k">Vaso tratado — tardias</td><td><strong>Reestenose intra-stent</strong>: hiperplasia neointimal (tecido cicatricial fibrótico) entupindo o vaso meses depois</td></tr>
+        <tr><td class="k">Sistêmicas</td><td>Nefropatia induzida por contraste, choque anafilático, <strong>microembolização distal</strong> (fragmentos da placa)</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <!-- 9 -->
+  <section class="block" id="s9">
+    <span class="sec-num">09</span>
+    <h2>Stent convencional × farmacológico</h2>
+    <div class="tbl"><table>
+      <thead><tr><th></th><th>Convencional (BMS, bare-metal)</th><th>Farmacológico (DES, drug-eluting)</th></tr></thead>
+      <tbody>
+        <tr><td class="k">O que é</td><td>Apenas a <strong>malha metálica nua</strong></td><td>Malha revestida por <strong>polímero</strong> que libera <strong>antiproliferativo</strong> (paclitaxel, sirolimus, everolimus)</td></tr>
+        <tr class="hl"><td class="k">Reestenose</td><td><strong>Alta</strong> (hiperplasia neointimal)</td><td><strong>&lt; 5%</strong>: o remédio inibe a cicatriz; é o <strong>padrão-ouro</strong> mundial</td></tr>
+        <tr><td class="k">Endotelização</td><td><strong>Rápida</strong></td><td><strong>Lenta</strong>: risco de trombose dura mais</td></tr>
+        <tr><td class="k">DAPT</td><td>Pode suspender cedo (<strong>1 a 3 meses</strong>): bom para quem fará cirurgia não cardíaca ou tem alto risco de sangramento</td><td>Rigorosa por <strong>6 a 12 meses</strong></td></tr>
+      </tbody>
+    </table></div>
+    <p><span class="src">Slides</span> Stent é <strong>prótese metálica expansível, cilíndrica</strong>, implantada logo após o balão; a implantação é igual à angioplastia. O farmacológico tem plataforma, agente farmacológico e carreador (polímero).</p>
+    <div class="trap"><span class="tag">Troca clássica</span><p>Convencional = <strong>mais reestenose</strong> e <strong>menos tempo</strong> de DAPT. Farmacológico = <strong>menos reestenose</strong> e <strong>mais tempo</strong> de DAPT.</p></div>
+  </section>
+
+  <!-- 10 -->
+  <section class="block" id="s10">
+    <span class="sec-num">10</span>
+    <h2>Angiografia</h2>
+    <div class="grid">
+      <div class="card"><h4>O que é</h4><p>Mapeamento <strong>dinâmico do lúmen</strong> dos vasos pela injeção de <strong>contraste iodado</strong> com emissão contínua de raios X. Slides: visualiza a luz do vaso e suas ramificações com contraste radiopaco intravascular.</p></div>
+      <div class="card"><h4>Por que fazer</h4><p><strong>Padrão-ouro da anatomia vascular</strong>: estenoses, aneurismas, malformações arteriovenosas, local de <strong>sangramento ativo</strong> (trauma, hemorragia digestiva) e nutrição de tumores antes da cirurgia.</p></div>
+      <div class="card"><h4>Eletiva × urgência</h4><p><span class="src">Slides</span> Eletiva: malformações, aneurismas, aterosclerose (aorta, mesentéricas, renais, membros inferiores). Urgência: AVC, <strong>embolias</strong>, <strong>tromboses</strong>.</p></div>
+    </div>
+    <h3>O processo: subtração digital <span class="src rev">Revisão</span></h3>
+    <ol class="steps">
+      <li><b>Máscara</b>O computador faz um raio-X <strong>antes</strong> do contraste</li>
+      <li><b>Contraste</b>Novo raio-X com o contraste nos vasos</li>
+      <li><b>Subtração</b>O software apaga osso e partes moles, deixando <strong>só a árvore vascular</strong></li>
+    </ol>
+    <h3>As fases (fluxo em tempo real)</h3>
+    <div class="stat-grid">
+      <div class="stat"><div class="big">1</div><div class="lbl"><strong>Arterial</strong>: o contraste ilumina as artérias (início rápido)</div></div>
+      <div class="stat"><div class="big">2</div><div class="lbl"><strong>Parenquimatosa (capilar)</strong>: "blush", brilho difuso no órgão</div></div>
+      <div class="stat"><div class="big">3</div><div class="lbl"><strong>Venosa</strong>: o contraste é recolhido pelas veias de retorno</div></div>
+    </div>
+    <p><strong>Vantagens</strong>: mostra a luz vascular de forma dinâmica, localiza o problema com exatidão e permite tratar no mesmo ato. A maioria dos estudos angiográficos (fluoroscopia, angio-TC, angio-RM) <strong>depende de contraste</strong>.</p>
+  </section>
+
+  <!-- 11 -->
+  <section class="block" id="s11">
+    <span class="sec-num">11</span>
+    <h2>Meios de contraste</h2>
+    <p>O sangue puro não aparece na tela: é preciso "pintá-lo" para enxergá-lo na fluoroscopia.</p>
+    <h3>Classificação — não confunda os critérios <span class="src rev">Revisão</span></h3>
+    <div class="tbl"><table>
+      <thead><tr><th>Critério</th><th>Divisão</th></tr></thead>
+      <tbody>
+        <tr class="hl"><td class="k">1. Absorção de raios X</td><td><strong>Positivos (radiopacos)</strong>: iodo e bário, aparecem <strong>brancos</strong>. <strong>Negativos (radiotransparentes)</strong>: ar e CO₂, aparecem <strong>pretos</strong></td></tr>
+        <tr><td class="k">2. Via e solubilidade</td><td><strong>Bário</strong>: insolúvel, <strong>exclusivo via digestiva</strong> (oral ou retal); no peritônio ou no sangue causa peritonite química ou embolia fatal. <strong>Iodo</strong>: hidrossolúvel, único positivo seguro <strong>intravascular</strong></td></tr>
+        <tr><td class="k">3. Osmolalidade e ionicidade</td><td><strong>Alta osmolalidade / iônicos</strong>: antigos, dor, calor, nefrotoxicidade e alergias. <strong>Baixa ou iso-osmolar / não iônicos</strong>: <strong>padrão-ouro</strong>, menos reações e menos lesão renal</td></tr>
+      </tbody>
+    </table></div>
+    <p><span class="src">Slides</span> Contrastes de raios X agem pela <strong>atenuação do feixe</strong>; os de RM (gadolínio) alteram o <strong>tempo de relaxamento</strong>. Não iônicos (baixa osmolalidade) são recomendados no <strong>alto risco</strong>: alergia grave e renal crônico.</p>
+    <div class="trap"><span class="tag">Não confunda com medicina nuclear</span><p>Positivo e negativo é a classificação dos <strong>contrastes de raios X</strong>. O que se injeta na cintilografia é <strong>radiofármaco</strong>, não contraste.</p></div>
+
+    <h3>Contraste positivo (iodado): contraindicações</h3>
+    <div class="grid">
+      <div class="card"><h4>1 · Nefrotoxicidade</h4><p>Nefropatia induzida por contraste: contraindicado na <strong>insuficiência renal aguda</strong> ou <strong>DRC avançada sem diálise</strong> (vasoconstrição renal e toxicidade tubular).</p></div>
+      <div class="card"><h4>2 · Hipersensibilidade</h4><p>Anafilaxia (choque, edema de glote) em quem tem <strong>alergia prévia documentada ao iodo</strong>.</p></div>
+      <div class="card"><h4>3 · Tireotoxicose</h4><p>Cuidado no <strong>hipertireoidismo grave não tratado</strong>.</p></div>
+    </div>
+
+    <h3>Contraste negativo (CO₂) — a segunda pergunta</h3>
+    <div class="two">
+      <div class="ok"><span class="tag">Características e vantagem</span>
+        <ul>
+          <li><strong>Radiotransparente</strong>: um "vazio", uma bolha escura; desloca o sangue.</li>
+          <li><strong>Extremamente solúvel</strong>: dissolve rápido e é <strong>eliminado 100% pelos pulmões</strong>.</li>
+          <li><strong>Zero nefrotoxicidade e não causa alergia</strong>.</li>
+          <li>Salvação na <strong>insuficiência renal grave</strong> ou na <strong>alergia grave ao iodo</strong> (angioplastia de membros inferiores, renais).</li>
+          <li><span class="src">Slides</span> Só é efetivo com <strong>subtração digital + software</strong>.</li>
+        </ul>
+      </div>
+      <div class="trap"><span class="tag">A grande contraindicação</span>
+        <ul>
+          <li><strong>Nunca acima do diafragma</strong>: carótidas, artérias cerebrais, coronárias, aorta torácica.</li>
+          <li>O gás pode não se dissolver a tempo → <strong>embolia gasosa cerebral</strong> (AVC isquêmico irreversível) ou isquemia miocárdica.</li>
+          <li>Slides: risco de <strong>toxicidade cerebral</strong> no uso intra-arterial acima do diafragma.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 12 -->
+  <section class="block" id="s12">
+    <span class="sec-num">12</span>
+    <h2>PMMA e a síndrome do cimento ósseo</h2>
+    <div class="grid">
+      <div class="card"><h4>O material</h4><p><strong>PMMA = polimetilmetacrilato</strong>, o cimento ósseo.</p></div>
+      <div class="card"><h4>Onde se usa</h4><p><strong>Vertebroplastia</strong> e <strong>cifoplastia</strong>: injeção de cimento numa vértebra fraturada por <strong>osteoporose ou tumor</strong>, para endurecê-la e aliviar a dor. Slides: várias vértebras podem ser tratadas no mesmo procedimento.</p></div>
+      <div class="card"><h4>Não confundir</h4><p><strong>Artrodese</strong> é cirurgia com <strong>parafusos e hastes</strong>, sem cimento injetado por agulha.</p></div>
+    </div>
+    <h3>BCIS — Bone Cement Implantation Syndrome <span class="src rev">Revisão</span></h3>
+    <p><strong>Fisiopatologia</strong>: o PMMA líquido é injetado <strong>sob alta pressão</strong> no osso esponjoso e pode forçar cimento, gordura da medula ou ar para as veias que drenam a vértebra. A reação de endurecimento é <strong>exotérmica</strong> e libera <strong>toxinas monoméricas vasodilatadoras</strong>.</p>
+    <p><strong>Quadro</strong>: segundos a minutos após a injeção, êmbolos atingem a circulação pulmonar, com:</p>
+    <div class="stat-grid">
+      <div class="stat"><div class="big">1</div><div class="lbl"><strong>Hipotensão profunda</strong> (queda da resistência vascular ou falência de VD)</div></div>
+      <div class="stat"><div class="big">2</div><div class="lbl"><strong>Hipóxia severa e súbita</strong> (dispneia aguda)</div></div>
+      <div class="stat"><div class="big">3</div><div class="lbl"><strong>Arritmias</strong> cardíacas</div></div>
+      <div class="stat"><div class="big">4</div><div class="lbl">Fulminante: choque obstrutivo, cor pulmonale agudo e <strong>parada cardiorrespiratória</strong></div></div>
+    </div>
+  </section>
+
+  <!-- 13 -->
+  <section class="block" id="s13">
+    <span class="sec-num">13</span>
+    <h2>Arco cirúrgico (fluoroscópio)</h2>
+    <p>O equipamento tem forma de <strong>"C"</strong>: as duas extremidades fazem funções opostas e devem estar bem posicionadas, pela segurança e pela qualidade da imagem.</p>
+    <div class="tbl"><table>
+      <thead><tr><th>Parte</th><th>Função</th><th>Posição</th></tr></thead>
+      <tbody>
+        <tr class="hl"><td class="k">Tubo de raios X (ampola)</td><td><strong>Emite o raio X</strong></td><td><strong>Embaixo da mesa</strong>: a radiação espalhada vai para o chão e para as pernas, poupando cabeça, olhos e tireoide</td></tr>
+        <tr><td class="k">Intensificador de imagem ou flat panel</td><td><strong>Capta</strong> o raio X</td><td><strong>Em cima</strong> do paciente, o <strong>mais próximo possível da pele</strong> (nitidez e menor dose)</td></tr>
+        <tr><td class="k">Colimador</td><td>Placas de chumbo ajustáveis ("persianas") na saída do tubo que <strong>recortam o feixe</strong></td><td>Fechar no alvo: melhora a imagem e reduz a dose de paciente e equipe</td></tr>
+        <tr><td class="k">Gerador</td><td>kV e mAs automáticos (compensação de dose) <span class="src">Slides</span></td><td>—</td></tr>
+      </tbody>
+    </table></div>
+    <p><span class="src">Slides</span> <strong>Início do arco cirúrgico</strong>: escolher o protocolo (geral, ortopedia, cardíaco, vascular, neurológico) → proteção estéril do intensificador ou do tubo → posicionar conforme o médico.</p>
+    <div class="tip"><span class="tag">Regra de ouro</span><p><strong>Tubo embaixo, receptor em cima e colado no paciente.</strong> A questão "qual parte emite o raio X?" tem uma resposta: o <strong>tubo (ampola)</strong>.</p></div>
+  </section>
+
+  <!-- 14 -->
+  <section class="block" id="s14">
+    <span class="sec-num">14</span>
+    <h2>Proteção radiológica e EPIs</h2>
+    <p>Na sala de hemodinâmica, a maior ameaça <strong>não é o feixe principal</strong>, e sim a <strong>radiação espalhada</strong> (secundária), que bate no paciente e reflete na equipe.</p>
+    <h3>ALARA — "As Low As Reasonably Achievable" <span class="src rev">Revisão</span></h3>
+    <div class="grid">
+      <div class="card"><h4>Tempo</h4><p>Reduzir o tempo de <strong>pedal</strong>; usar a <strong>memória de imagem</strong> em vez de emitir novos raios.</p></div>
+      <div class="card"><h4>Distância</h4><p><strong>Lei do inverso do quadrado</strong>: um passo para trás durante a injeção reduz a dose de forma exponencial.</p></div>
+      <div class="card"><h4>Blindagem</h4><p>EPIs e EPCs (biombo de teto, saias de chumbo).</p></div>
+      <div class="card"><h4>Colimação</h4><p>Fechar o campo só na área necessária reduz a <strong>radiação espalhada</strong>, a principal que irradia o médico.</p></div>
+    </div>
+    <p><span class="src">Slides</span> Princípios: <strong>justificação</strong> (há indicação?), <strong>limitação</strong> (limites de dose) e <strong>otimização</strong> (a menor dose compatível com a qualidade). Fluoroscopia longa → atenção à <strong>dose de entrada na pele</strong>, ligada a lesões cutâneas.</p>
+    <h3>EPIs — uso inegociável</h3>
+    <div class="tbl"><table>
+      <thead><tr><th>Equipamento</th><th>Protege / função</th></tr></thead>
+      <tbody>
+        <tr><td class="k">Avental plumbífero</td><td>Tronco, pelve e órgãos reprodutores; deve ser vestido <strong>na frente e nas costas</strong></td></tr>
+        <tr><td class="k">Protetor de tireoide</td><td>Gola de chumbo: a tireoide é <strong>altamente radiossensível</strong> (risco de câncer)</td></tr>
+        <tr class="hl"><td class="k">Óculos plumbíferos</td><td>Cristalino: evitam a <strong>catarata actínica</strong>, doença ocupacional clássica do intervencionista</td></tr>
+        <tr><td class="k">Dosímetro</td><td><strong>Não protege, monitora.</strong> Na revisão: usado <strong>por baixo</strong> do avental, na altura do tórax, para medir a dose efetiva</td></tr>
+        <tr><td class="k">Proteções coletivas (EPC)</td><td>Biombo de vidro plumbífero no teto e saias de chumbo na mesa (protegem as pernas)</td></tr>
+      </tbody>
+    </table></div>
+    <div class="trap"><span class="tag">Pegadinhas</span><ul><li>Dosímetro <strong>não é proteção</strong>.</li><li>EPI <strong>não substitui</strong> tempo, distância e colimação.</li><li>A ameaça principal é a <strong>radiação espalhada</strong>.</li></ul></div>
+  </section>
+
+  <!-- 15 -->
+  <section class="block" id="s15">
+    <span class="sec-num">15</span>
+    <h2>Riscos: intervenção é cirurgia</h2>
+    <div class="tip"><span class="tag">O mito do "apenas um exame"</span><p>Mesmo minimamente invasiva e com anestesia local e sedação, a RI <strong>é um procedimento cirúrgico</strong>: há manipulação de materiais dentro do sistema cardiovascular e de órgãos vitais. <span class="src">Slides</span> <strong>"Não existe procedimento invasivo sem riscos."</strong></p></div>
+    <div class="tbl"><table>
+      <thead><tr><th>Bloco</th><th>Riscos <span class="src rev">Revisão</span></th></tr></thead>
+      <tbody>
+        <tr><td class="k">Locais (acesso)</td><td>Hematomas, <strong>sangramento retroperitoneal oculto</strong> (complicação temida da punção femoral alta), pseudoaneurisma, fístula arteriovenosa, isquemia do membro por trombose no local</td></tr>
+        <tr class="hl"><td class="k">Técnicos (trajeto e alvo)</td><td><strong>Dissecção</strong> (o cateter rasga a íntima); <strong>perfuração</strong> (na coronária: derrame pericárdico e <strong>tamponamento</strong>); <strong>embolização distal</strong> (placa da aorta → AVC, infarto renal, isquemia das pernas); vasoespasmo grave</td></tr>
+        <tr><td class="k">Sistêmicos</td><td><strong>Choque anafilático</strong> (alergia ao contraste), <strong>nefropatia por contraste</strong>, sangramentos maiores por <strong>heparina</strong> em altas doses, infecções</td></tr>
+        <tr><td class="k">Lista dos slides</td><td>Alergia ao contraste, hematoma e sangramento na punção, embolização de fragmentos do trombo, <strong>AVC</strong>, <strong>IAM</strong>, <strong>rotura coronária</strong>, <strong>arritmia</strong>, <strong>insuficiência renal aguda</strong></td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <!-- 16 -->
+  <section class="block" id="s16">
+    <span class="sec-num">16</span>
+    <h2>Direcionamento para a prova</h2>
+    <p>A prova é de <strong>radiologia intervencionista</strong>. Cada tópico da leitura em sala vira uma questão; os tópicos de <strong>riscos</strong> e de <strong>contraste negativo</strong> aparecem duas vezes.</p>
+
+    <h3>Números para decorar</h3>
+    <div class="stat-grid">
+      <div class="stat"><div class="big">2 mm</div><div class="lbl">Punção radial do stent</div></div>
+      <div class="stat"><div class="big">~20 atm</div><div class="lbl">Pressão do balão (slides)</div></div>
+      <div class="stat"><div class="big">&gt;90%</div><div class="lbl">Sucesso do balão a curto prazo</div></div>
+      <div class="stat"><div class="big">30% / 6 m</div><div class="lbl">Reobstrução com balão isolado</div></div>
+      <div class="stat"><div class="big">&lt;5%</div><div class="lbl">Reestenose com stent farmacológico</div></div>
+      <div class="stat"><div class="big">1–3 m</div><div class="lbl">DAPT mínima do stent convencional</div></div>
+      <div class="stat"><div class="big">6–12 m</div><div class="lbl">DAPT do stent farmacológico</div></div>
+      <div class="stat"><div class="big">0,80</div><div class="lbl">Corte da FFR (≤ → stent)</div></div>
+      <div class="stat"><div class="big">50 / 70%</div><div class="lbl">Estenose moderada / grave; tronco &gt; 50%</div></div>
+      <div class="stat"><div class="big">T8·T10·T12</div><div class="lbl">Hiatos: cava, esôfago, aorta</div></div>
+      <div class="stat"><div class="big">0,5–30</div><div class="lbl">Imagens por segundo na fluoroscopia</div></div>
+      <div class="stat"><div class="big">100%</div><div class="lbl">CO₂ eliminado pelos pulmões</div></div>
+    </div>
+
+    <h3>Associações rápidas (caso → resposta)</h3>
+    <div class="tbl"><table>
+      <thead><tr><th>Se a questão disser...</th><th>Responda...</th></tr></thead>
+      <tbody>
+        <tr><td>"Fotografia congelada" × "filme em tempo real"</td><td>Radiografia × fluoroscopia</td></tr>
+        <tr><td>Via preferencial do cateterismo</td><td>Radial (padrão-ouro; menos sangramento)</td></tr>
+        <tr><td>Via calibrosa para aneurisma de aorta e neuro</td><td>Femoral comum (repouso absoluto depois)</td></tr>
+        <tr><td>"Artéria faz-viúvas" / parede anterior e septo</td><td>Descendente anterior</td></tr>
+        <tr><td>Parede lateral do VE</td><td>Circunflexa</td></tr>
+        <tr><td>VD e parede inferior</td><td>Coronária direita</td></tr>
+        <tr><td>Músculo que separa tórax e abdome</td><td>Diafragma</td></tr>
+        <tr><td>Avalia pressões e oximetria</td><td>Estudo hemodinâmico (não a angiografia)</td></tr>
+        <tr><td>Técnica de punção</td><td>Seldinger</td></tr>
+        <tr><td>"Angioplastia usa mola?"</td><td>Não: fio-guia + balão + stent; mola é embolização</td></tr>
+        <tr><td>Por que o stent? (recoil)</td><td>Impede o recolhimento elástico do vaso</td></tr>
+        <tr><td>Complicação mais fatal pós-stent</td><td>Trombose aguda do stent → DAPT</td></tr>
+        <tr><td>Vaso entope meses depois por cicatriz</td><td>Reestenose intra-stent (hiperplasia neointimal)</td></tr>
+        <tr><td>Paciente fará outra cirurgia logo</td><td>Stent convencional (DAPT curta)</td></tr>
+        <tr><td>Remover osso da imagem</td><td>Subtração digital (máscara)</td></tr>
+        <tr><td>"Blush" no órgão</td><td>Fase parenquimatosa (capilar)</td></tr>
+        <tr><td>Bário no peritônio ou no sangue</td><td>Peritonite química ou embolia fatal</td></tr>
+        <tr><td>Renal grave ou alérgico ao iodo, artéria da perna</td><td>CO₂</td></tr>
+        <tr><td>CO₂ em carótida, coronária ou aorta torácica</td><td>Contraindicado: embolia gasosa cerebral</td></tr>
+        <tr><td>Hipotensão, hipóxia e arritmia ao injetar cimento</td><td>BCIS (síndrome do PMMA)</td></tr>
+        <tr><td>Qual parte emite o raio X?</td><td>Tubo (ampola), embaixo da mesa</td></tr>
+        <tr><td>Catarata do intervencionista</td><td>Catarata actínica → óculos plumbíferos</td></tr>
+        <tr><td>Dosímetro</td><td>Monitora, não protege</td></tr>
+        <tr><td>Sangramento oculto após punção femoral alta</td><td>Hematoma retroperitoneal</td></tr>
+        <tr><td>Perfuração coronária</td><td>Derrame pericárdico e tamponamento</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3>Pegadinhas mais prováveis</h3>
+    <div class="two">
+      <div class="trap"><span class="tag">Conceitos</span><ul>
+        <li>RI <strong>diagnostica e trata</strong>.</li>
+        <li>"Minimamente invasivo" ≠ sem risco: <strong>é cirurgia</strong>.</li>
+        <li>A equipe vai além do médico.</li>
+        <li>Coronária ≠ carótida.</li>
+        <li>Angiografia = anatomia; hemodinâmica = pressões.</li>
+      </ul></div>
+      <div class="trap"><span class="tag">Técnica e materiais</span><ul>
+        <li>Balão entra <strong>desinsuflado</strong>.</li>
+        <li>Iodo e bário positivos (brancos); ar e CO₂ negativos (pretos).</li>
+        <li>Não iônico de baixa osmolalidade é o padrão-ouro.</li>
+        <li>Tubo <strong>embaixo</strong> (e não o intensificador).</li>
+        <li>A ameaça principal é a <strong>radiação espalhada</strong>.</li>
+      </ul></div>
+    </div>
+
+    <h3>Checklist de véspera</h3>
+    <ul class="check">
+      <li>Explico os 3 objetivos da RI e comparo stent × ponte de safena em 4 critérios.</li>
+      <li>Descrevo o papel de cada profissional da equipe.</li>
+      <li>Diferencio radiografia e fluoroscopia em física, imagem e uso.</li>
+      <li>Sei radial × femoral, o trajeto do cateter e os territórios de ACD, DA e Cx.</li>
+      <li>Sei que o diafragma separa tórax e abdome, seus hiatos e a regra do CO₂.</li>
+      <li>Diferencio angiografia (anatomia) e estudo hemodinâmico (pressões, FFR).</li>
+      <li>Descrevo Seldinger → balão → stent e sei que não usa mola.</li>
+      <li>Sei quando fazer stent (IAM, isquemia, FFR) e quando operar (tronco, 3 vasos).</li>
+      <li>Sei a DAPT, a estatina e as complicações agudas e tardias.</li>
+      <li>Diferencio stent convencional e farmacológico (reestenose × DAPT).</li>
+      <li>Sei conceito, indicações, subtração digital e as 3 fases da angiografia.</li>
+      <li>Classifico os contrastes pelos 3 critérios e listo as contraindicações.</li>
+      <li>Descrevo o PMMA, onde é usado e a BCIS.</li>
+      <li>Identifico as partes do arco em C e qual emite o raio X.</li>
+      <li>Sei ALARA (tempo, distância, blindagem, colimação), os princípios e os EPIs.</li>
+      <li>Listo os riscos locais, técnicos e sistêmicos.</li>
+    </ul>
+  </section>
+
+  <footer>Resumo por Geraldo Sandoval · fontes: Revisão DI 4º P (aula particular de João Amado Santos de Oliveira, sem vínculo oficial com a instituição) e Radiologia Intervencionista — Slides gerais 2024. Itens com a etiqueta "Revisão" vêm da revisão; "Slides", dos slides oficiais.</footer>
+</main>
+
+<script>
+(function(){
+  const links=[...document.querySelectorAll('#nav a')];
+  const targets=links.map(a=>document.querySelector(a.getAttribute('href')));
+  const side=document.getElementById('side'), btn=document.getElementById('menuBtn'), scrim=document.getElementById('scrim');
+  function openM(){side.classList.add('open');scrim.hidden=false;btn.setAttribute('aria-expanded','true');}
+  function closeM(){side.classList.remove('open');scrim.hidden=true;btn.setAttribute('aria-expanded','false');}
+  btn.addEventListener('click',()=>side.classList.contains('open')?closeM():openM());
+  scrim.addEventListener('click',closeM);
+  links.forEach(a=>a.addEventListener('click',()=>{ if(window.innerWidth<=960) closeM(); }));
+  document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeM(); });
+  function spy(){
+    let cur=0; const h=document.documentElement;
+    targets.forEach((t,i)=>{ if(t && t.getBoundingClientRect().top<=140) cur=i; });
+    if(h.scrollTop+h.clientHeight>=h.scrollHeight-4) cur=targets.length-1;
+    links.forEach((a,i)=>a.classList.toggle('active',i===cur));
+  }
+  window.addEventListener('scroll',spy,{passive:true}); window.addEventListener('resize',spy); spy();
+})();
+</script>
+</body>
+</html>
